@@ -3,342 +3,679 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lumen Coffee — Seu ritual começa aqui</title>
+  <title>Veloce Motors — Dirija o extraordinário</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #08090b;
+      --bg-light: #101216;
+      --card: #13151a;
+      --text: #f5f5f5;
+      --muted: #9a9da5;
+      --red: #e50914;
+      --red-dark: #a8070f;
+      --border: rgba(255,255,255,.09);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    :root {
-      --bg: #f7f1e8;
-      --dark: #211a16;
-      --brown: #795548;
-      --orange: #d96b32;
-      --cream: #fffaf2;
-      --muted: #776e67;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Inter, Arial, sans-serif;
       background: var(--bg);
-      color: var(--dark);
-      line-height: 1.6;
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    /* NAVBAR */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(8, 9, 11, .72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
     nav {
-      max-width: 1180px;
+      width: min(1200px, 92%);
       margin: auto;
-      padding: 24px 28px;
+      height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.35rem;
+      font-weight: 900;
       letter-spacing: -1px;
     }
 
     .logo span {
-      color: var(--orange);
+      color: var(--red);
     }
 
-    nav a {
-      color: var(--dark);
-      text-decoration: none;
-      margin-left: 28px;
-      font-size: .95rem;
-      font-weight: 600;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #d7d7d7;
+      font-size: .9rem;
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+      color: white;
     }
 
     .nav-btn {
-      background: var(--dark);
-      color: white !important;
-      padding: 11px 20px;
-      border-radius: 50px;
+      padding: 11px 19px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 100px;
     }
+
+    .nav-btn:hover {
+      background: white;
+      color: black !important;
+    }
+
+    .menu {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* HERO */
 
     .hero {
-      max-width: 1180px;
-      min-height: 680px;
-      margin: auto;
-      padding: 70px 28px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 50px;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 130px 0 80px;
+      background:
+        radial-gradient(circle at 80% 50%, rgba(229,9,20,.16), transparent 35%),
+        linear-gradient(115deg, #08090b 30%, #101216 100%);
     }
 
-    .tag {
-      display: inline-block;
-      background: #ead9c5;
-      color: #704a32;
-      padding: 8px 14px;
-      border-radius: 50px;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(8,9,11,.95) 0%,
+        rgba(8,9,11,.6) 45%,
+        rgba(8,9,11,.05) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-container {
+      width: min(1200px, 92%);
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff4b53;
       font-size: .8rem;
-      font-weight: 800;
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      background: var(--red);
     }
 
     h1 {
-      font-size: clamp(3.2rem, 7vw, 6.2rem);
-      line-height: .95;
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(3.4rem, 7vw, 6.8rem);
+      line-height: .9;
       letter-spacing: -5px;
-      max-width: 680px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
     }
 
     h1 span {
-      color: var(--orange);
+      color: var(--red);
     }
 
     .hero p {
-      color: var(--muted);
-      max-width: 540px;
-      font-size: 1.15rem;
-      margin: 28px 0;
+      color: #b5b7bd;
+      max-width: 500px;
+      line-height: 1.7;
+      font-size: 1.02rem;
+      margin-bottom: 35px;
     }
 
-    .buttons {
+    .hero-buttons {
       display: flex;
       gap: 14px;
-      align-items: center;
+      flex-wrap: wrap;
     }
 
     .btn {
-      display: inline-block;
-      text-decoration: none;
-      padding: 15px 24px;
-      border-radius: 50px;
+      border: 0;
+      cursor: pointer;
+      padding: 15px 25px;
+      border-radius: 5px;
       font-weight: 700;
-      transition: .2s;
+      transition: .3s;
     }
 
     .btn-primary {
-      background: var(--orange);
+      background: var(--red);
       color: white;
-      box-shadow: 0 10px 25px rgba(217, 107, 50, .25);
+      box-shadow: 0 10px 35px rgba(229,9,20,.2);
     }
 
     .btn-primary:hover {
+      background: #ff1824;
       transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(229,9,20,.35);
     }
 
     .btn-secondary {
-      color: var(--dark);
+      color: white;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
     }
 
-    .coffee-card {
-      height: 500px;
-      border-radius: 40px;
-      background:
-        radial-gradient(circle at 70% 20%, rgba(255,255,255,.35), transparent 25%),
-        linear-gradient(145deg, #9d6b4b, #43271c);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 30px 70px rgba(52, 32, 21, .25);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.12);
     }
 
-    .coffee-card::before {
-      content: "";
+    .hero-car {
       position: absolute;
-      width: 270px;
-      height: 270px;
-      background: #d8c2a7;
-      border-radius: 50%;
-      top: -70px;
-      right: -60px;
-      opacity: .3;
+      right: -3%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(62vw, 850px);
+      z-index: 1;
+      filter: drop-shadow(0 30px 50px rgba(0,0,0,.6));
+      animation: floatCar 5s ease-in-out infinite;
     }
 
-    .cup {
-      width: 250px;
-      height: 190px;
-      background: #fff8ec;
-      border-radius: 20px 20px 70px 70px;
-      position: relative;
-      box-shadow: 0 25px 35px rgba(0,0,0,.3);
+    @keyframes floatCar {
+      0%,100% { transform: translateY(-50%); }
+      50% { transform: translateY(calc(-50% - 8px)); }
     }
 
-    .cup::before {
-      content: "";
-      position: absolute;
-      width: 205px;
-      height: 55px;
-      background: #3b2116;
-      border-radius: 50%;
-      top: -12px;
-      left: 22px;
-    }
-
-    .cup::after {
-      content: "";
-      position: absolute;
-      width: 75px;
-      height: 75px;
-      border: 18px solid #fff8ec;
-      border-left: 0;
-      border-radius: 0 50% 50% 0;
-      right: -65px;
-      top: 25px;
-    }
-
-    .steam {
-      position: absolute;
-      color: rgba(255,255,255,.65);
-      font-size: 70px;
-      top: 70px;
-      letter-spacing: 20px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      50% { transform: translateY(-12px); opacity: .4; }
-    }
+    /* STATS */
 
     .stats {
-      background: var(--cream);
-      padding: 60px 28px;
+      background: var(--red);
+      color: white;
     }
 
-    .stats-inner {
-      max-width: 1000px;
+    .stats-container {
+      width: min(1100px, 92%);
       margin: auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat {
       text-align: center;
+      padding: 27px 15px;
+      border-right: 1px solid rgba(255,255,255,.2);
+    }
+
+    .stat:last-child {
+      border: none;
     }
 
     .stat strong {
-      font-size: 2.5rem;
       display: block;
+      font-family: "Montserrat";
+      font-size: 1.6rem;
     }
 
     .stat span {
-      color: var(--muted);
+      font-size: .75rem;
+      opacity: .8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .section {
-      max-width: 1100px;
+    /* SECTIONS */
+
+    section {
+      padding: 110px 0;
+    }
+
+    .container {
+      width: min(1200px, 92%);
       margin: auto;
-      padding: 110px 28px;
     }
 
-    .section-header {
+    .section-heading {
       text-align: center;
       max-width: 650px;
       margin: 0 auto 55px;
     }
 
-    .section-header h2 {
-      font-size: 3rem;
-      letter-spacing: -2px;
+    .section-heading .eyebrow {
+      justify-content: center;
+    }
+
+    .section-heading h2 {
+      font-family: "Montserrat";
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
       line-height: 1;
+      letter-spacing: -2px;
       margin-bottom: 18px;
     }
 
-    .section-header p {
+    .section-heading p {
       color: var(--muted);
+      line-height: 1.7;
     }
 
-    .cards {
+    /* CARS */
+
+    .cars {
+      background: #0c0d10;
+    }
+
+    .cars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .car-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: .4s;
+      border-radius: 8px;
+    }
+
+    .car-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(229,9,20,.4);
+    }
+
+    .car-image {
+      height: 245px;
+      overflow: hidden;
+      background: #17191d;
+    }
+
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .5s;
+    }
+
+    .car-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .car-info {
+      padding: 25px;
+    }
+
+    .car-category {
+      color: var(--red);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .car-info h3 {
+      font-family: "Montserrat";
+      font-size: 1.5rem;
+      margin: 7px 0 15px;
+    }
+
+    .car-specs {
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 17px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .car-specs strong {
+      display: block;
+      color: white;
+      font-size: .95rem;
+      margin-bottom: 3px;
+    }
+
+    /* TECHNOLOGY */
+
+    .technology {
+      background:
+        linear-gradient(rgba(8,9,11,.8), rgba(8,9,11,.95)),
+        url("https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=2000&q=85")
+        center/cover fixed;
+    }
+
+    .tech-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .tech-content h2 {
+      font-family: "Montserrat";
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: .95;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .tech-content h2 span {
+      color: var(--red);
+    }
+
+    .tech-content p {
+      color: #aaa;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
 
-    .card {
-      background: var(--cream);
-      padding: 32px;
-      border-radius: 25px;
+    .feature {
+      padding: 20px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 5px;
     }
 
-    .icon {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .card h3 {
+    .feature-icon {
+      color: var(--red);
+      font-size: 1.5rem;
       margin-bottom: 10px;
-      font-size: 1.25rem;
     }
 
-    .card p {
-      color: var(--muted);
+    .feature h3 {
       font-size: .95rem;
+      margin-bottom: 6px;
     }
+
+    .feature p {
+      font-size: .78rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* TESTIMONIAL */
+
+    .testimonial {
+      background: #0c0d10;
+    }
+
+    .quote {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .quote-mark {
+      color: var(--red);
+      font-family: Georgia;
+      font-size: 6rem;
+      height: 65px;
+    }
+
+    .quote blockquote {
+      font-family: "Montserrat";
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      line-height: 1.35;
+      margin: 20px 0 30px;
+    }
+
+    .customer {
+      color: var(--muted);
+    }
+
+    .customer strong {
+      display: block;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    /* CTA */
 
     .cta {
-      margin: 30px auto 100px;
-      max-width: 1100px;
-      padding: 80px 40px;
-      border-radius: 35px;
-      text-align: center;
-      color: white;
+      padding: 100px 0;
       background:
-        radial-gradient(circle at 20% 20%, #a66b48, transparent 30%),
-        var(--dark);
+        radial-gradient(circle at center, rgba(229,9,20,.25), transparent 55%),
+        #090a0c;
+      text-align: center;
     }
 
     .cta h2 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      letter-spacing: -2px;
-      line-height: 1;
-      margin-bottom: 18px;
+      font-family: "Montserrat";
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: -3px;
+      margin-bottom: 20px;
     }
 
     .cta p {
-      color: #c9beb5;
-      max-width: 500px;
-      margin: 0 auto 30px;
+      color: var(--muted);
+      max-width: 550px;
+      margin: auto auto 30px;
+      line-height: 1.7;
     }
+
+    /* FORM */
+
+    .form-section {
+      background: #0c0d10;
+    }
+
+    .form-box {
+      max-width: 750px;
+      margin: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 45px;
+      border-radius: 8px;
+    }
+
+    .form-box h2 {
+      font-family: "Montserrat";
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .form-box > p {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    input {
+      width: 100%;
+      background: #0b0c0e;
+      color: white;
+      border: 1px solid var(--border);
+      padding: 15px;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--red);
+    }
+
+    /* FOOTER */
 
     footer {
-      border-top: 1px solid #dfd4c8;
-      padding: 30px 28px;
-      color: var(--muted);
-      text-align: center;
-      font-size: .9rem;
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      color: #777;
+      font-size: .8rem;
     }
 
-    @media (max-width: 800px) {
-      nav a:not(.nav-btn) {
+    .footer-content {
+      width: min(1200px, 92%);
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .nav-links {
         display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        width: 100%;
+        background: #0a0b0d;
+        padding: 25px;
+        flex-direction: column;
+        gap: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu {
+        display: block;
       }
 
       .hero {
-        grid-template-columns: 1fr;
-        padding-top: 40px;
+        min-height: auto;
+        padding: 150px 0 80px;
       }
 
-      .hero h1 {
+      .hero-car {
+        position: relative;
+        width: 110%;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin: 50px -5% 0;
+      }
+
+      .hero::after {
+        background: linear-gradient(
+          180deg,
+          rgba(8,9,11,.8),
+          rgba(8,9,11,.2)
+        );
+      }
+
+      .cars-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tech-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
         letter-spacing: -3px;
       }
 
-      .coffee-card {
-        height: 380px;
+      .stats-container {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .stats-inner,
-      .cards {
+      .stat:nth-child(2) {
+        border-right: none;
+      }
+
+      .cars-grid {
         grid-template-columns: 1fr;
       }
 
-      .stats-inner {
-        gap: 35px;
+      .features {
+        grid-template-columns: 1fr;
       }
 
-      .section {
-        padding: 80px 28px;
+      .input-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-box {
+        padding: 25px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
@@ -346,126 +683,405 @@
 
 <body>
 
-  <nav>
-    <div class="logo">lumen<span>.</span></div>
+  <!-- NAVBAR -->
+  <header>
+    <nav>
+      <a href="#" class="logo">VELOCE<span>.</span></a>
 
-    <div>
-      <a href="#sobre">Sobre</a>
-      <a href="#diferenciais">Diferenciais</a>
-      <a href="#contato" class="nav-btn">Experimentar</a>
-    </div>
-  </nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#modelos">Modelos</a></li>
+        <li><a href="#tecnologia">Tecnologia</a></li>
+        <li><a href="#depoimento">Experiência</a></li>
+        <li><a href="#contato" class="nav-btn">Test-drive</a></li>
+      </ul>
 
-  <main>
+      <button class="menu" id="menu">☰</button>
+    </nav>
+  </header>
 
-    <section class="hero">
-      <div>
-        <span class="tag">☕ Café artesanal</span>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container">
+
+      <div class="hero-content">
+        <div class="eyebrow">A nova geração chegou</div>
 
         <h1>
-          Seu dia merece um café <span>extraordinário.</span>
+          Dirija o<br>
+          <span>extraordinário.</span>
         </h1>
 
         <p>
-          Grãos selecionados, torra artesanal e uma experiência criada
-          para transformar aqueles primeiros minutos do seu dia.
+          Design agressivo, tecnologia inteligente e performance
+          criada para transformar cada quilômetro em uma experiência
+          inesquecível.
         </p>
 
-        <div class="buttons">
-          <a href="#contato" class="btn btn-primary">
-            Quero experimentar →
+        <div class="hero-buttons">
+          <a href="#modelos" class="btn btn-primary">
+            Explorar modelos
           </a>
 
-          <a href="#sobre" class="btn btn-secondary">
-            Conheça a Lumen
+          <a href="#contato" class="btn btn-secondary">
+            Agendar test-drive
           </a>
         </div>
       </div>
 
-      <div class="coffee-card">
-        <div class="steam">〰〰</div>
-        <div class="cup"></div>
+      <img
+        class="hero-car"
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=90"
+        alt="Carro esportivo"
+      >
+
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-container">
+
+      <div class="stat">
+        <strong>3.2s</strong>
+        <span>0–100 km/h</span>
       </div>
-    </section>
 
-    <section class="stats">
-      <div class="stats-inner">
-        <div class="stat">
-          <strong>18k+</strong>
-          <span>clientes felizes</span>
-        </div>
-
-        <div class="stat">
-          <strong>4.9/5</strong>
-          <span>avaliação média</span>
-        </div>
-
-        <div class="stat">
-          <strong>12</strong>
-          <span>origens selecionadas</span>
-        </div>
+      <div class="stat">
+        <strong>650 CV</strong>
+        <span>Potência máxima</span>
       </div>
-    </section>
 
-    <section class="section" id="diferenciais">
-      <div class="section-header">
-        <h2>Não é só café.</h2>
+      <div class="stat">
+        <strong>320 km/h</strong>
+        <span>Velocidade máxima</span>
+      </div>
+
+      <div class="stat">
+        <strong>100%</strong>
+        <span>Emoção</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODELOS -->
+  <section class="cars" id="modelos">
+    <div class="container">
+
+      <div class="section-heading">
+        <div class="eyebrow">Nossa coleção</div>
+
+        <h2>Escolha sua máquina.</h2>
+
         <p>
-          É um pequeno ritual diário. E nós cuidamos de cada detalhe
-          para que ele seja especial.
+          Três interpretações diferentes de performance.
+          Uma única filosofia: nunca aceitar o comum.
         </p>
       </div>
 
-      <div class="cards">
+      <div class="cars-grid">
 
-        <div class="card">
-          <div class="icon">🌱</div>
-          <h3>Grãos selecionados</h3>
+        <article class="car-card">
+          <div class="car-image">
+            <img
+              src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=85"
+              alt="Veloce R8"
+            >
+          </div>
+
+          <div class="car-info">
+            <span class="car-category">Esportivo</span>
+            <h3>Veloce R8</h3>
+
+            <div class="car-specs">
+              <div>
+                <strong>620 CV</strong>
+                Potência
+              </div>
+
+              <div>
+                <strong>3.4s</strong>
+                0–100 km/h
+              </div>
+
+              <div>
+                <strong>V8</strong>
+                Motor
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-image">
+            <img
+              src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1000&q=85"
+              alt="Veloce GT"
+            >
+          </div>
+
+          <div class="car-info">
+            <span class="car-category">Grand Touring</span>
+            <h3>Veloce GT</h3>
+
+            <div class="car-specs">
+              <div>
+                <strong>480 CV</strong>
+                Potência
+              </div>
+
+              <div>
+                <strong>4.1s</strong>
+                0–100 km/h
+              </div>
+
+              <div>
+                <strong>V6</strong>
+                Motor
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-image">
+            <img
+              src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=1000&q=85"
+              alt="Veloce X"
+            >
+          </div>
+
+          <div class="car-info">
+            <span class="car-category">SUV Performance</span>
+            <h3>Veloce X</h3>
+
+            <div class="car-specs">
+              <div>
+                <strong>550 CV</strong>
+                Potência
+              </div>
+
+              <div>
+                <strong>3.8s</strong>
+                0–100 km/h
+              </div>
+
+              <div>
+                <strong>AWD</strong>
+                Tração
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGIA -->
+  <section class="technology" id="tecnologia">
+    <div class="container">
+
+      <div class="tech-content">
+
+        <div>
+          <div class="eyebrow">Tecnologia Veloce</div>
+
+          <h2>
+            Inteligência que<br>
+            <span>acelera com você.</span>
+          </h2>
+
           <p>
-            Trabalhamos com pequenos produtores e selecionamos apenas
-            grãos de alta qualidade.
+            Cada detalhe foi desenvolvido para conectar você ao carro.
+            Sistemas inteligentes, assistência avançada ao motorista e
+            uma experiência digital completamente integrada.
           </p>
+
+          <a href="#contato" class="btn btn-primary">
+            Conheça a tecnologia
+          </a>
         </div>
 
-        <div class="card">
-          <div class="icon">🔥</div>
-          <h3>Torra fresca</h3>
-          <p>
-            Torramos em pequenos lotes para preservar aromas, sabores
-            e toda a personalidade do café.
-          </p>
-        </div>
+        <div class="features">
 
-        <div class="card">
-          <div class="icon">✨</div>
-          <h3>Experiência Lumen</h3>
-          <p>
-            Do pacote à primeira xícara, tudo foi pensado para tornar
-            seu momento de café mais prazeroso.
-          </p>
+          <div class="feature">
+            <div class="feature-icon">◉</div>
+            <h3>Cockpit Digital</h3>
+            <p>
+              Todas as informações essenciais diante dos seus olhos.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Performance</h3>
+            <p>
+              Resposta instantânea e controle preciso em qualquer situação.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">◆</div>
+            <h3>Assistência IA</h3>
+            <p>
+              Tecnologia inteligente para tornar cada viagem mais segura.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">⌁</div>
+            <h3>Conectividade</h3>
+            <p>
+              Seu smartphone e seu carro trabalhando juntos.
+            </p>
+          </div>
+
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="cta" id="contato">
-      <h2>Pronto para mudar<br>seu café da manhã?</h2>
+  <!-- DEPOIMENTO -->
+  <section class="testimonial" id="depoimento">
+    <div class="container">
+
+      <div class="quote">
+        <div class="quote-mark">“</div>
+
+        <blockquote>
+          “Não é apenas um carro. É aquela sensação de ligar o motor
+          e saber que você está prestes a viver alguma coisa especial.”
+        </blockquote>
+
+        <div class="customer">
+          <strong>Rafael Mendes</strong>
+          Cliente Veloce
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+
+      <div class="eyebrow">Seu próximo capítulo começa aqui</div>
+
+      <h2>Pronto para acelerar?</h2>
 
       <p>
-        Receba seu primeiro pacote Lumen e descubra como um café
-        realmente fresco pode fazer diferença.
+        Agende uma experiência exclusiva e descubra qual Veloce
+        combina com você.
       </p>
 
-      <a href="#" class="btn btn-primary">
-        Começar agora ☕
+      <a href="#contato" class="btn btn-primary">
+        Agendar test-drive
       </a>
-    </section>
 
-  </main>
+    </div>
+  </section>
 
+  <!-- FORM -->
+  <section class="form-section" id="contato">
+    <div class="container">
+
+      <div class="form-box">
+
+        <h2>Agende seu test-drive.</h2>
+
+        <p>
+          Preencha seus dados e nossa equipe entrará em contato.
+        </p>
+
+        <form id="contactForm">
+
+          <div class="input-row">
+            <input
+              type="text"
+              placeholder="Seu nome"
+              required
+            >
+
+            <input
+              type="email"
+              placeholder="Seu melhor e-mail"
+              required
+            >
+          </div>
+
+          <div class="input-row">
+            <input
+              type="tel"
+              placeholder="Telefone"
+              required
+            >
+
+            <input
+              type="text"
+              placeholder="Modelo de interesse"
+              required
+            >
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+            Quero fazer um test-drive
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    © 2026 Lumen Coffee — Feito para quem aprecia cada gole.
+    <div class="footer-content">
+      <div class="logo">VELOCE<span>.</span></div>
+
+      <div>
+        © 2026 Veloce Motors. Todos os direitos reservados.
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Menu mobile
+    const menu = document.getElementById("menu");
+    const navLinks = document.getElementById("navLinks");
+
+    menu.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+    });
+
+    // Formulário
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const button = form.querySelector("button");
+
+      button.textContent = "Solicitação enviada ✓";
+      button.style.background = "#20a464";
+
+      setTimeout(() => {
+        button.textContent = "Quero fazer um test-drive";
+        button.style.background = "";
+        form.reset();
+      }, 3000);
+    });
+  </script>
 
 </body>
 </html>
