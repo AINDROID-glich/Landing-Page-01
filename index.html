@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumen Coffee — Seu ritual começa aqui</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f7f1e8;
+      --dark: #211a16;
+      --brown: #795548;
+      --orange: #d96b32;
+      --cream: #fffaf2;
+      --muted: #776e67;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    nav a {
+      color: var(--dark);
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .nav-btn {
+      background: var(--dark);
+      color: white !important;
+      padding: 11px 20px;
+      border-radius: 50px;
+    }
+
+    .hero {
+      max-width: 1180px;
+      min-height: 680px;
+      margin: auto;
+      padding: 70px 28px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #ead9c5;
+      color: #704a32;
+      padding: 8px 14px;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 7vw, 6.2rem);
+      line-height: .95;
+      letter-spacing: -5px;
+      max-width: 680px;
+    }
+
+    h1 span {
+      color: var(--orange);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 540px;
+      font-size: 1.15rem;
+      margin: 28px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 15px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 10px 25px rgba(217, 107, 50, .25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      color: var(--dark);
+    }
+
+    .coffee-card {
+      height: 500px;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,.35), transparent 25%),
+        linear-gradient(145deg, #9d6b4b, #43271c);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(52, 32, 21, .25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .coffee-card::before {
+      content: "";
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      background: #d8c2a7;
+      border-radius: 50%;
+      top: -70px;
+      right: -60px;
+      opacity: .3;
+    }
+
+    .cup {
+      width: 250px;
+      height: 190px;
+      background: #fff8ec;
+      border-radius: 20px 20px 70px 70px;
+      position: relative;
+      box-shadow: 0 25px 35px rgba(0,0,0,.3);
+    }
+
+    .cup::before {
+      content: "";
+      position: absolute;
+      width: 205px;
+      height: 55px;
+      background: #3b2116;
+      border-radius: 50%;
+      top: -12px;
+      left: 22px;
+    }
+
+    .cup::after {
+      content: "";
+      position: absolute;
+      width: 75px;
+      height: 75px;
+      border: 18px solid #fff8ec;
+      border-left: 0;
+      border-radius: 0 50% 50% 0;
+      right: -65px;
+      top: 25px;
+    }
+
+    .steam {
+      position: absolute;
+      color: rgba(255,255,255,.65);
+      font-size: 70px;
+      top: 70px;
+      letter-spacing: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      50% { transform: translateY(-12px); opacity: .4; }
+    }
+
+    .stats {
+      background: var(--cream);
+      padding: 60px 28px;
+    }
+
+    .stats-inner {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat strong {
+      font-size: 2.5rem;
+      display: block;
+    }
+
+    .stat span {
+      color: var(--muted);
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 110px 28px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 55px;
+    }
+
+    .section-header h2 {
+      font-size: 3rem;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--cream);
+      padding: 32px;
+      border-radius: 25px;
+    }
+
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .cta {
+      margin: 30px auto 100px;
+      max-width: 1100px;
+      padding: 80px 40px;
+      border-radius: 35px;
+      text-align: center;
+      color: white;
+      background:
+        radial-gradient(circle at 20% 20%, #a66b48, transparent 30%),
+        var(--dark);
+    }
+
+    .cta h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .cta p {
+      color: #c9beb5;
+      max-width: 500px;
+      margin: 0 auto 30px;
+    }
+
+    footer {
+      border-top: 1px solid #dfd4c8;
+      padding: 30px 28px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 800px) {
+      nav a:not(.nav-btn) {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .coffee-card {
+        height: 380px;
+      }
+
+      .stats-inner,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-inner {
+        gap: 35px;
+      }
+
+      .section {
+        padding: 80px 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">lumen<span>.</span></div>
+
+    <div>
+      <a href="#sobre">Sobre</a>
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#contato" class="nav-btn">Experimentar</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div>
+        <span class="tag">☕ Café artesanal</span>
+
+        <h1>
+          Seu dia merece um café <span>extraordinário.</span>
+        </h1>
+
+        <p>
+          Grãos selecionados, torra artesanal e uma experiência criada
+          para transformar aqueles primeiros minutos do seu dia.
+        </p>
+
+        <div class="buttons">
+          <a href="#contato" class="btn btn-primary">
+            Quero experimentar →
+          </a>
+
+          <a href="#sobre" class="btn btn-secondary">
+            Conheça a Lumen
+          </a>
+        </div>
+      </div>
+
+      <div class="coffee-card">
+        <div class="steam">〰〰</div>
+        <div class="cup"></div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stats-inner">
+        <div class="stat">
+          <strong>18k+</strong>
+          <span>clientes felizes</span>
+        </div>
+
+        <div class="stat">
+          <strong>4.9/5</strong>
+          <span>avaliação média</span>
+        </div>
+
+        <div class="stat">
+          <strong>12</strong>
+          <span>origens selecionadas</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diferenciais">
+      <div class="section-header">
+        <h2>Não é só café.</h2>
+        <p>
+          É um pequeno ritual diário. E nós cuidamos de cada detalhe
+          para que ele seja especial.
+        </p>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="icon">🌱</div>
+          <h3>Grãos selecionados</h3>
+          <p>
+            Trabalhamos com pequenos produtores e selecionamos apenas
+            grãos de alta qualidade.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔥</div>
+          <h3>Torra fresca</h3>
+          <p>
+            Torramos em pequenos lotes para preservar aromas, sabores
+            e toda a personalidade do café.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">✨</div>
+          <h3>Experiência Lumen</h3>
+          <p>
+            Do pacote à primeira xícara, tudo foi pensado para tornar
+            seu momento de café mais prazeroso.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="cta" id="contato">
+      <h2>Pronto para mudar<br>seu café da manhã?</h2>
+
+      <p>
+        Receba seu primeiro pacote Lumen e descubra como um café
+        realmente fresco pode fazer diferença.
+      </p>
+
+      <a href="#" class="btn btn-primary">
+        Começar agora ☕
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Lumen Coffee — Feito para quem aprecia cada gole.
+  </footer>
+
+</body>
+</html>
