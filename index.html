@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GameZone</title>
+  <title>NEXUS — O universo dos games</title>
 
   <style>
     * {
@@ -12,77 +12,461 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080812;
+      color: #fff;
+      overflow-x: hidden;
     }
 
+    /* NAVBAR */
     header {
-      padding: 20px;
-      background: #191919;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(8, 8, 18, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    header h2 {
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      height: 75px;
+      padding: 0 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .logo span {
       color: #8b5cf6;
     }
 
-    .hero {
-      padding: 100px 20px;
-      background: linear-gradient(135deg, #111, #4c1d95);
-    }
-
-    .hero h1 {
-      font-size: 50px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      color: #ddd;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 15px 25px;
-      background: #8b5cf6;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-
-    .jogos {
-      padding: 60px 20px;
-    }
-
-    .jogos h2 {
-      margin-bottom: 30px;
-    }
-
-    .cards {
+    nav ul {
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      gap: 30px;
+      list-style: none;
     }
 
-    .card {
-      width: 250px;
-      padding: 30px;
-      background: #222;
-      border-radius: 10px;
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
     }
 
-    .card h3 {
-      margin-bottom: 10px;
+    nav a:hover {
       color: #a78bfa;
     }
 
-    footer {
-      padding: 20px;
-      background: #191919;
+    .nav-btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: white;
+      font-weight: bold;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 75% 45%, rgba(124,58,237,.35), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(236,72,153,.15), transparent 30%),
+        #080812;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: auto;
+      padding: 120px 25px 70px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(167,139,250,.4);
+      border-radius: 50px;
+      color: #c4b5fd;
+      background: rgba(124,58,237,.1);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      max-width: 750px;
+      font-size: clamp(50px, 8vw, 92px);
+      line-height: .95;
+      font-weight: 900;
+      letter-spacing: -4px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #a78bfa, #ec4899);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 580px;
+      color: #aaa;
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 28px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 16px 26px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: .3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: #fff;
+      box-shadow: 0 10px 35px rgba(124,58,237,.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 45px rgba(236,72,153,.3);
+    }
+
+    .btn-secondary {
+      color: #ddd;
+      border: 1px solid #333;
+      background: rgba(255,255,255,.03);
+    }
+
+    .btn-secondary:hover {
+      border-color: #8b5cf6;
+      background: rgba(139,92,246,.1);
+    }
+
+    /* FLOATING GAME CARD */
+    .hero-card {
+      position: absolute;
+      right: 7%;
+      top: 25%;
+      width: 300px;
+      height: 400px;
+      border-radius: 25px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      transform: rotate(6deg);
+      background:
+        linear-gradient(to top, rgba(0,0,0,.9), transparent),
+        linear-gradient(135deg, #30135c, #10101e);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-card::before {
+      content: "GAME";
+      position: absolute;
+      top: 30px;
+      right: -35px;
+      font-size: 70px;
+      font-weight: 900;
+      color: rgba(255,255,255,.04);
+      transform: rotate(-90deg);
+    }
+
+    .hero-card h3 {
+      font-size: 30px;
+    }
+
+    .hero-card p {
+      font-size: 13px;
+      margin: 8px 0 0;
+      color: #aaa;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(6deg); }
+      50% { transform: translateY(-18px) rotate(6deg); }
+    }
+
+    /* STATS */
+    .stats {
+      border-top: 1px solid #1c1c2b;
+      border-bottom: 1px solid #1c1c2b;
+      background: #0b0b15;
+    }
+
+    .stats-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 35px 25px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+    }
+
+    .stat h2 {
+      color: #a78bfa;
+      font-size: 35px;
+    }
+
+    .stat p {
+      color: #777;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    /* GAMES */
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 100px 25px;
+    }
+
+    .section-header {
+      margin-bottom: 45px;
+    }
+
+    .section-header small {
+      color: #a78bfa;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .section-header h2 {
+      font-size: 45px;
+      margin-top: 10px;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .game {
+      min-height: 350px;
+      border-radius: 18px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #242436;
+      transition: .4s;
+    }
+
+    .game:hover {
+      transform: translateY(-8px);
+      border-color: #8b5cf6;
+    }
+
+    .game::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #050509, transparent 70%);
+    }
+
+    .game-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .game-1 {
+      background: linear-gradient(135deg, #24105b, #ec4899);
+    }
+
+    .game-2 {
+      background: linear-gradient(135deg, #052e3b, #0891b2);
+    }
+
+    .game-3 {
+      background: linear-gradient(135deg, #3b1a08, #ea580c);
+    }
+
+    .game h3 {
+      font-size: 28px;
+    }
+
+    .game p {
+      color: #bbb;
+      margin: 8px 0 15px;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.1);
+      font-size: 11px;
+      color: #ddd;
+    }
+
+    /* BENEFITS */
+    .benefits {
+      background: #0b0b15;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .benefit {
+      padding: 35px;
+      border: 1px solid #202031;
+      border-radius: 16px;
+      background: #0e0e19;
+      transition: .3s;
+    }
+
+    .benefit:hover {
+      border-color: #7c3aed;
+      transform: translateY(-5px);
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(124,58,237,.15);
+      color: #a78bfa;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .benefit h3 {
+      margin-bottom: 10px;
+    }
+
+    .benefit p {
       color: #888;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* CTA */
+    .cta {
+      max-width: 1100px;
+      margin: 100px auto;
+      padding: 80px 30px;
+      text-align: center;
+      border-radius: 25px;
+      background:
+        radial-gradient(circle at center, rgba(124,58,237,.35), transparent 60%),
+        #10101c;
+      border: 1px solid #29293d;
+    }
+
+    .cta h2 {
+      font-size: clamp(35px, 5vw, 60px);
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #999;
+      max-width: 550px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 35px 25px;
+      border-top: 1px solid #1c1c2b;
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 900px) {
+      .hero-card {
+        display: none;
+      }
+
+      .games,
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .section-header h2 {
+        font-size: 35px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -90,40 +474,180 @@
 <body>
 
   <header>
-    <h2>🎮 GameZone</h2>
+    <nav>
+      <div class="logo">NEX<span>US</span></div>
+
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#jogos">Jogos</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+      </ul>
+
+      <a href="#jogos" class="nav-btn">Explorar</a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <h1>Entre no mundo dos games</h1>
-    <p>Descubra jogos incríveis e viva novas aventuras.</p>
-    <a href="#jogos" class="btn">Ver jogos</a>
-  </section>
+  <main>
 
-  <section class="jogos" id="jogos">
-    <h2>Jogos em destaque</h2>
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-content">
 
-    <div class="cards">
+        <span class="badge">🎮 A próxima geração começa aqui</span>
 
-      <div class="card">
-        <h3>🔥 Battle Arena</h3>
-        <p>Entre em batalhas épicas.</p>
+        <h1>
+          Entre no <span>universo</span> dos games.
+        </h1>
+
+        <p>
+          Descubra novos mundos, enfrente desafios épicos e encontre
+          experiências que vão transformar a maneira como você joga.
+        </p>
+
+        <div class="buttons">
+          <a href="#jogos" class="btn btn-primary">
+            Explorar jogos →
+          </a>
+
+          <a href="#beneficios" class="btn btn-secondary">
+            Saiba mais
+          </a>
+        </div>
+
+        <div class="hero-card">
+          <div>
+            <span class="tag">AÇÃO • RPG</span>
+            <h3>NEON<br>LEGENDS</h3>
+            <p>O futuro está em suas mãos.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stats-container">
+
+        <div class="stat">
+          <h2>10K+</h2>
+          <p>Jogadores ativos</p>
+        </div>
+
+        <div class="stat">
+          <h2>250+</h2>
+          <p>Jogos disponíveis</p>
+        </div>
+
+        <div class="stat">
+          <h2>4.9/5</h2>
+          <p>Avaliação da comunidade</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- JOGOS -->
+    <section class="section" id="jogos">
+
+      <div class="section-header">
+        <small>Catálogo</small>
+        <h2>Jogos em destaque</h2>
       </div>
 
-      <div class="card">
-        <h3>🚀 Space World</h3>
-        <p>Explore o espaço e novos planetas.</p>
-      </div>
+      <div class="games">
 
-      <div class="card">
-        <h3>🧙 Magic Quest</h3>
-        <p>Viva uma aventura cheia de magia.</p>
-      </div>
+        <article class="game game-1">
+          <div class="game-content">
+            <span class="tag">RPG</span>
+            <h3>Neon Legends</h3>
+            <p>Explore uma cidade futurista dominada por tecnologia.</p>
+          </div>
+        </article>
 
-    </div>
-  </section>
+        <article class="game game-2">
+          <div class="game-content">
+            <span class="tag">AVENTURA</span>
+            <h3>Ocean Rift</h3>
+            <p>Descubra os segredos escondidos nas profundezas.</p>
+          </div>
+        </article>
+
+        <article class="game game-3">
+          <div class="game-content">
+            <span class="tag">AÇÃO</span>
+            <h3>Inferno X</h3>
+            <p>Entre em batalhas intensas e prove que você é o melhor.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="benefits" id="beneficios">
+
+      <div class="section">
+
+        <div class="section-header">
+          <small>Por que jogar?</small>
+          <h2>Uma experiência completa</h2>
+        </div>
+
+        <div class="benefit-grid">
+
+          <div class="benefit">
+            <div class="icon">⚡</div>
+            <h3>Ação intensa</h3>
+            <p>
+              Experimente partidas rápidas, desafios competitivos
+              e momentos que vão testar suas habilidades.
+            </p>
+          </div>
+
+          <div class="benefit">
+            <div class="icon">🌎</div>
+            <h3>Novos mundos</h3>
+            <p>
+              Viaje por universos fantásticos e conheça histórias
+              criadas para prender sua atenção.
+            </p>
+          </div>
+
+          <div class="benefit">
+            <div class="icon">🏆</div>
+            <h3>Seja o melhor</h3>
+            <p>
+              Supere seus limites, conquiste troféus e mostre
+              suas habilidades para toda a comunidade.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+
+      <h2>Pronto para jogar?</h2>
+
+      <p>
+        Seu próximo grande desafio está esperando.
+        Escolha seu jogo, prepare-se e entre na partida.
+      </p>
+
+      <a href="#jogos" class="btn btn-primary">
+        Começar agora 🚀
+      </a>
+
+    </section>
+
+  </main>
 
   <footer>
-    © 2026 GameZone
+    © 2026 NEXUS Gaming — Feito para quem vive os games.
   </footer>
 
 </body>
