@@ -1,252 +1,798 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>eFootball - Football Evolution</title>
+  <title>GTA VI — Welcome to Vice City</title>
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #090014;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(8, 0, 25, .15),
+          rgba(8, 0, 25, .65),
+          #090014
+        ),
+        linear-gradient(
+          135deg,
+          #ff3cac 0%,
+          #784ba0 45%,
+          #2b86c5 100%
+        );
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(255, 177, 76, .9),
+          transparent 18%
+        ),
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(255, 50, 150, .45),
+          transparent 45%
+        );
+
+      z-index: 0;
+    }
+
+    .sun {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+
+      background: linear-gradient(
+        #ffd86f,
+        #ff8a3d
+      );
+
+      box-shadow:
+        0 0 80px #ff9b54,
+        0 0 160px rgba(255, 80, 180, .5);
+
+      bottom: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      opacity: .95;
+    }
+
+    .sun::after {
+      content: "";
+      position: absolute;
+      inset: 50% 0 0;
+
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 8px,
+        rgba(255, 70, 80, .35) 9px,
+        rgba(255, 70, 80, .35) 12px
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding: 30px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px #000;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(100px, 18vw, 260px);
+      line-height: .75;
+
+      color: #fff;
+
+      text-shadow:
+        5px 5px 0 #ff2f9f,
+        10px 10px 0 #5d2cff,
+        0 0 40px rgba(255,255,255,.35);
+
+      letter-spacing: 4px;
+    }
+
+    .logo span {
+      display: block;
+      font-size: .38em;
+      letter-spacing: 12px;
+      margin-top: 25px;
+
+      color: #ffcf67;
+
+      text-shadow:
+        3px 3px 0 #ff3c9e,
+        0 0 20px rgba(255, 207, 103, .7);
+    }
+
+    .subtitle {
+      max-width: 600px;
+      margin: 35px auto;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #f4eaff;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2px;
+
+      border: 2px solid #fff;
+      border-radius: 4px;
+
+      transition: .3s;
+
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn.primary {
+      background: linear-gradient(
+        90deg,
+        #ff2f9f,
+        #8e43ff
+      );
+
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(255, 47, 159, .35);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(255, 47, 159, .45);
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      padding: 25px 6%;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      z-index: 10;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      color: #fff;
+      text-decoration: none;
+      text-shadow: 2px 2px #ff299b;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: #ff65bb;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    section {
+      padding: 120px 8%;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(50px, 8vw, 100px);
+      line-height: .9;
+
+      background: linear-gradient(
+        90deg,
+        #ff43a8,
+        #ffd36a,
+        #58c7ff
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-description {
+      max-width: 650px;
+      margin-top: 25px;
+      color: #bdb0c9;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       VICE CITY
+    ========================= */
+
+    .vice-city {
+      min-height: 90vh;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255, 40, 150, .18),
+          transparent 35%
+        ),
+        #090014;
+    }
+
+    .features {
+      margin-top: 70px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .card {
+      min-height: 280px;
+      padding: 35px;
+
+      border: 1px solid rgba(255, 92, 187, .25);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.07),
+          rgba(255,255,255,.015)
+        );
+
+      backdrop-filter: blur(15px);
+
+      transition: .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: #ff3ba8;
+      filter: blur(80px);
+      opacity: .25;
+      right: -50px;
+      top: -50px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #ff4db0;
+      box-shadow: 0 20px 60px rgba(255, 35, 150, .15);
+    }
+
+    .card-number {
+      color: #ff48a9;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      margin: 35px 0 15px;
+      letter-spacing: 1px;
+    }
+
+    .card p {
+      color: #a99bb4;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* =========================
+       CHARACTERS
+    ========================= */
+
+    .characters {
+      background:
+        linear-gradient(
+          180deg,
+          #090014,
+          #120021
+        );
+    }
+
+    .character-grid {
+      margin-top: 70px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .character {
+      min-height: 500px;
+      padding: 40px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.9),
+          rgba(0,0,0,.1)
+        ),
+        linear-gradient(
+          135deg,
+          #ff399f,
+          #4a3aff
+        );
+
+      transition: .4s;
+    }
+
+    .character:nth-child(2) {
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.9),
+          rgba(0,0,0,.1)
+        ),
+        linear-gradient(
+          135deg,
+          #39c8ff,
+          #a13cff
+        );
+    }
+
+    .character:hover {
+      transform: scale(1.02);
+    }
+
+    .character h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 70px;
+      text-shadow: 3px 3px #000;
+    }
+
+    .character p {
+      max-width: 450px;
+      color: #eee;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      min-height: 70vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          rgba(12,0,30,.55),
+          rgba(12,0,30,.95)
+        ),
+        linear-gradient(
+          135deg,
+          #ff2d9b,
+          #3020aa
+        );
+    }
+
+    .cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(70px, 12vw, 150px);
+      line-height: .8;
+
+      text-shadow:
+        4px 4px #ff9c45,
+        8px 8px #471d8f;
+    }
+
+    .cta p {
+      max-width: 550px;
+      margin: 35px auto;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px 8%;
+      background: #050008;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: #76687d;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      nav ul {
+        display: none;
+      }
+
+      .features,
+      .character-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sun {
+        width: 280px;
+        height: 280px;
+      }
+
+      .character {
+        min-height: 400px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- MENU -->
+  <!-- NAVBAR -->
 
-    <header>
+  <nav>
+    <a href="#" class="nav-logo">VI</a>
 
-        <div class="logo">
-            eFOOTBALL
-        </div>
+    <ul>
+      <li><a href="#cidade">Vice City</a></li>
+      <li><a href="#personagens">Personagens</a></li>
+      <li><a href="#jogo">O jogo</a></li>
+    </ul>
+  </nav>
 
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#modos">Modos</a>
-            <a href="#jogadores">Jogadores</a>
-        </nav>
 
-        <button class="menu-btn">
-            ☰
-        </button>
+  <!-- HERO -->
 
-    </header>
+  <header class="hero">
 
+    <div class="sun"></div>
 
-    <!-- HERO -->
+    <div class="hero-content">
 
-    <section id="inicio" class="hero">
+      <div class="eyebrow">
+        Welcome to Vice City
+      </div>
 
-        <div class="hero-content">
+      <h1 class="logo">
+        GTA
+        <span>VI</span>
+      </h1>
 
-            <p class="subtitulo">
-                O FUTEBOL DIGITAL
-            </p>
+      <p class="subtitle">
+        Uma nova era começa em Vice City.
+        Prepare-se para uma aventura repleta de
+        velocidade, crime, luxo e noites inesquecíveis.
+      </p>
 
-            <h1>
-                VIVA O<br>
-                <span>FUTEBOL</span>
-            </h1>
+      <div class="buttons">
+        <a href="#jogo" class="btn primary">
+          Descobrir o jogo
+        </a>
 
-            <p>
-                Monte seu time, enfrente grandes adversários
-                e mostre que você tem o que é preciso para
-                chegar ao topo.
-            </p>
+        <a href="#personagens" class="btn">
+          Conhecer personagens
+        </a>
+      </div>
 
-            <button class="btn" id="jogar">
-                JOGAR AGORA ⚽
-            </button>
+    </div>
 
-        </div>
+  </header>
 
-    </section>
 
+  <!-- VICE CITY -->
 
-    <!-- SOBRE -->
+  <section class="vice-city" id="cidade">
 
-    <section id="sobre" class="sobre">
+    <h2 class="section-title">
+      VICE CITY
+    </h2>
 
-        <div class="texto">
+    <p class="section-description">
+      Uma cidade vibrante, perigosa e cheia de possibilidades.
+      Entre praias ensolaradas, ruas movimentadas e noites
+      iluminadas por neon, cada esquina guarda uma história.
+    </p>
 
-            <p class="subtitulo">
-                SOBRE O JOGO
-            </p>
 
-            <h2>
-                O futebol está<br>
-                nas suas mãos.
-            </h2>
+    <div class="features">
 
-            <p>
-                Crie seu próprio time dos sonhos, escolha
-                seus jogadores favoritos e participe de
-                partidas emocionantes.
-            </p>
+      <article class="card">
+        <span class="card-number">01 — CIDADE</span>
 
-        </div>
-
-        <div class="bola">
-            ⚽
-        </div>
-
-    </section>
-
-
-    <!-- MODOS -->
-
-    <section id="modos" class="modos">
-
-        <p class="subtitulo">
-            EXPERIÊNCIAS
-        </p>
-
-        <h2>
-            MODOS DE JOGO
-        </h2>
-
-        <div class="cards">
-
-            <div class="card">
-
-                <div class="icone">
-                    🏆
-                </div>
-
-                <h3>
-                    Dream Team
-                </h3>
-
-                <p>
-                    Monte seu elenco dos sonhos e
-                    enfrente jogadores de todo o mundo.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="icone">
-                    ⚡
-                </div>
-
-                <h3>
-                    Partida Rápida
-                </h3>
-
-                <p>
-                    Entre em campo rapidamente e
-                    dispute partidas emocionantes.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="icone">
-                    🌎
-                </div>
-
-                <h3>
-                    Competição
-                </h3>
-
-                <p>
-                    Enfrente adversários e suba no
-                    ranking mundial.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- JOGADORES -->
-
-    <section id="jogadores" class="jogadores">
-
-        <p class="subtitulo">
-            ESTRELAS DO FUTEBOL
-        </p>
-
-        <h2>
-            MONTE SEU TIME
-        </h2>
-
-        <div class="jogadores-grid">
-
-            <div class="jogador">
-                <span>ST</span>
-                <h3>ATACANTE</h3>
-                <p>Finalização</p>
-            </div>
-
-            <div class="jogador destaque">
-                <span>AMF</span>
-                <h3>MEIA</h3>
-                <p>Criação</p>
-            </div>
-
-            <div class="jogador">
-                <span>CB</span>
-                <h3>DEFENSOR</h3>
-                <p>Marcação</p>
-            </div>
-
-            <div class="jogador">
-                <span>GK</span>
-                <h3>GOLEIRO</h3>
-                <p>Defesa</p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CTA -->
-
-    <section class="cta">
-
-        <h2>
-            PRONTO PARA ENTRAR EM CAMPO?
-        </h2>
+        <h3>Neon Nights</h3>
 
         <p>
-            Monte seu time e comece sua jornada.
+          Explore uma Vice City reimaginada,
+          onde o pôr do sol encontra as luzes
+          vibrantes da noite.
         </p>
-
-        <button class="btn" id="comecar">
-            COMEÇAR AGORA
-        </button>
-
-    </section>
+      </article>
 
 
-    <!-- FOOTER -->
+      <article class="card">
+        <span class="card-number">02 — LIBERDADE</span>
 
-    <footer>
-
-        <h3>eFOOTBALL</h3>
+        <h3>Live Large</h3>
 
         <p>
-            Página temática criada para fins educacionais.
+          Descubra novos lugares, encontre
+          personagens únicos e construa sua
+          própria história pela cidade.
         </p>
+      </article>
+
+
+      <article class="card">
+        <span class="card-number">03 — AÇÃO</span>
+
+        <h3>No Limits</h3>
 
         <p>
-            © 2026 Football Evolution
+          Velocidade, perseguições e grandes
+          aventuras esperam por você em cada
+          parte de Vice City.
+        </p>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- PERSONAGENS -->
+
+  <section class="characters" id="personagens">
+
+    <h2 class="section-title">
+      PERSONAGENS
+    </h2>
+
+    <p class="section-description">
+      Duas pessoas. Uma cidade. Um caminho que pode
+      mudar tudo.
+    </p>
+
+
+    <div class="character-grid">
+
+      <article class="character">
+
+        <span class="card-number">
+          PROTAGONISTA
+        </span>
+
+        <h3>Lucia</h3>
+
+        <p>
+          Uma personagem determinada que busca
+          construir seu próprio futuro em meio
+          ao caos de Vice City.
         </p>
 
-    </footer>
+      </article>
 
 
-    <script src="script.js"></script>
+      <article class="character">
+
+        <span class="card-number">
+          PROTAGONISTA
+        </span>
+
+        <h3>Jason</h3>
+
+        <p>
+          Um personagem envolvido em uma jornada
+          onde confiança, ambição e sobrevivência
+          entram em conflito.
+        </p>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="cta" id="jogo">
+
+    <div>
+
+      <h2>
+        VICE<br>
+        CITY
+      </h2>
+
+      <p>
+        A cidade está esperando.
+        Você está pronto para voltar às ruas?
+      </p>
+
+      <a href="#" class="btn primary">
+        Entrar no hype
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <span>
+      GTA VI — FAN LANDING PAGE
+    </span>
+
+    <span>
+      Projeto conceitual • Não oficial
+    </span>
+
+  </footer>
+
+
+  <script>
+
+    // Pequeno efeito de movimento no pôr do sol
+
+    document.addEventListener("mousemove", (event) => {
+
+      const sun = document.querySelector(".sun");
+
+      const x = (event.clientX / window.innerWidth - .5) * 20;
+      const y = (event.clientY / window.innerHeight - .5) * 20;
+
+      sun.style.transform =
+        `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
+
+    });
+
+
+    // Animação de entrada dos cards
+
+    const cards = document.querySelectorAll(".card, .character");
+
+    const observer = new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+
+          }
+
+        });
+
+      },
+      { threshold: .15 }
+    );
+
+
+    cards.forEach(card => {
+
+      card.style.opacity = "0";
+      card.style.transform = "translateY(40px)";
+      card.style.transition =
+        "opacity .8s ease, transform .8s ease";
+
+      observer.observe(card);
+
+    });
+
+  </script>
 
 </body>
-
 </html>
